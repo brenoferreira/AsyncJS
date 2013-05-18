@@ -1,0 +1,14 @@
+{
+    "name": "TDC_Async",
+    "version": "0.1.0",
+    "main": "public/",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "components"
+    ],
+    "dependencies": {
+        "jquery": "*",
+        "rxjs": "*"
+    }
+}
