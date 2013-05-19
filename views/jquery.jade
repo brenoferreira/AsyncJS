@@ -6,6 +6,13 @@ block content
     div.progress.progress-striped.active
         div.bar
 
+    div#twitter
+        form.form-search
+            input#searchTxt.input-medium.search-query(placeholder="Search twitter", type="text")
+            input.btn.btn-primary(type="submit", value="Search")
+        div#results
+
+
 block scripts
     script(src="/components/jquery/jquery.js")
     script(src="/javascripts/jqueryasync.js")

@@ -91,5 +91,31 @@ $(function(){
             });
     };
 
-    loadScripts();
+    var twitter = function(query){
+        return $.get('/twitter?q=' + query);
+    };
+
+    var twitterTest = function(){
+        $('form').submit(function(e){
+            e.preventDefault();
+
+            $('.btn').attr('disabled','disabled');
+
+            var encodedQuery = encodeURIComponent($('#searchTxt').val());
+            twitter(encodedQuery)
+                .then(function(results){
+                    return JSON.parse(results).results;
+                })
+                .then(function(tweets){
+                    tweets.forEach(function(tweet){
+                        $('#results').append('<p>' + tweet.text + '</p>');
+                    });
+                })
+                .done(function(){
+                    $('.btn').removeAttr('disabled');
+                });
+        });
+    }
+
+    twitterTest();
 });
