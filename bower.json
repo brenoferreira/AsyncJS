@@ -9,6 +9,7 @@
     ],
     "dependencies": {
         "jquery": "*",
-        "rxjs": "*"
+        "rxjs": "*",
+        "bootstrap": "*"
     }
 }
