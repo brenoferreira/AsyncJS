@@ -56,5 +56,29 @@ $(function(){
             });
     };
 
+    var asyncProgress = function(){
+        var deferred = $.Deferred();
 
+        var i = 0;
+        setInterval(function(){
+            i += 10;
+            deferred.notify(i);
+            if(i == 100)
+                deferred.resolve(i);
+        }, 300);
+
+        return deferred.promise();
+    }
+
+    var asyncProgressTest = function(){
+        asyncProgress()
+            .progress(function(progress){
+                $('.bar').css('width', progress + '%');
+            })
+            .done(function(){
+                $('.bar').addClass('bar-success');
+            });
+    }
+
+    asyncProgressTest();
 });

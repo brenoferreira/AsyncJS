@@ -10,6 +10,6 @@
     "dependencies": {
         "jquery": "*",
         "rxjs": "*",
-        "bootstrap": "*"
+        "bootstrap.css": "*"
     }
 }
