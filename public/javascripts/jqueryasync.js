@@ -17,13 +17,15 @@ $(function(){
         return deferred.promise();
     };
 
-    asyncOp()
-        .done(function(result){
-           alert(result);
-        })
-        .fail(function(error){
-            alert(error);
-        });
+    var asyncOpTest = function(){
+        asyncOp()
+            .done(function(result){
+                alert(result);
+            })
+            .fail(function(error){
+                alert(error);
+            });
+    };
 
     var asyncSum = function(timeout){
         var deferred = $.Deferred();
@@ -38,17 +40,21 @@ $(function(){
         return deferred.promise();
     };
 
-    asyncSum(1)
-        .then(function(result){
-            return asyncSum(result + 1);
-        })
-        .then(function(result){
-            return asyncSum(result + 1);
-        })
-        .done(function(result){
-            alert('waited ' + result + ' times');
-        })
-        .fail(function(error){
-            alert(error);
-        });
+    var asyncSumTest = function(){
+        asyncSum(1)
+            .then(function(result){
+                return asyncSum(result + 1);
+            })
+            .then(function(result){
+                return asyncSum(result + 1);
+            })
+            .done(function(result){
+                alert('waited ' + result + ' times');
+            })
+            .fail(function(error){
+                alert(error);
+            });
+    };
+
+
 });
