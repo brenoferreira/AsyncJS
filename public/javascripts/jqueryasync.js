@@ -8,13 +8,13 @@
 
 $(function(){
     var asyncOp = function(){
-        var future = $.Deferred();
+        var deferred = $.Deferred();
 
         setTimeout(function(){
-            future.resolve('done');
+            deferred.resolve('done');
         }, 1000);
 
-        return future.promise();
+        return deferred.promise();
     };
 
     asyncOp()
@@ -26,16 +26,16 @@ $(function(){
         });
 
     var asyncSum = function(timeout){
-        var future = $.Deferred();
+        var deferred = $.Deferred();
 
         if(timeout > 3){
-            future.reject('larger than 3');
+            deferred.reject('larger than 3');
         }
         setTimeout(function(){
-            future.resolve(timeout);
+            deferred.resolve(timeout);
         }, 1000);
 
-        return future.promise();
+        return deferred.promise();
     };
 
     asyncSum(1)
