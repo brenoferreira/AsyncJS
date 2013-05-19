@@ -80,5 +80,16 @@ $(function(){
             });
     }
 
-    asyncProgressTest();
+    var loadScripts = function(){
+        var d1 = $.getScript('/javascripts/dummies/dummy2.js');
+        var d2 = $.getScript('/javascripts/dummies/dummy3.js');
+        var d3 = $.getScript('/javascripts/dummies/dummy1.js');
+
+        $.when(d1, d2, d3)
+            .done(function(dummy1, dummy2, dummy3){
+                alert('scripts loaded');
+            });
+    };
+
+    loadScripts();
 });
