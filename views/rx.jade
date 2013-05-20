@@ -1,9 +1,13 @@
 extends layout
 
 block content
-    h1= title
+    div#churrasco
+
+    canvas#canvas
 
 block scripts
     script(src="/components/jquery/jquery.js")
     script(src="/components/rxjs/rx.js")
+    script(src="/components/rxjs/rx.time.js")
+    script(src="/components/rxjs/rx.aggregates.js")
     script(src="/javascripts/rxevents.js")
