@@ -13,7 +13,8 @@ $(function(){
         var cozinha = function () {
             var i = Math.ceil((Math.random() * 10 % 4) - 1);
             return carnes[i];
-        }
+        };
+
         var garcom = Rx.Observable
             .interval(300)
             .map(function (i) {
@@ -84,7 +85,7 @@ $(function(){
             .fromEvent(canvas, 'mousemove')
             .map(function(e){
                 return getInputCoordinates(e);
-            });;
+            });
 
         var mouseUp = Rx.Observable.fromEvent(canvas, 'mouseup');
 
@@ -110,5 +111,16 @@ $(function(){
             };
         }
     };
-    desenho();
+    //desenho();
+
+    var observable = Rx.Observable.generate(
+        0,
+        function(state) { return true; },
+        function(state){ return Math.ceil((Math.random() * 10 % 4) - 1); },
+        function(state) { return state; }
+    ).throttle(1000);
+
+    observable.subscribe(function(n){
+        console.log(n);
+    });
 });
