@@ -111,16 +111,5 @@ $(function(){
             };
         }
     };
-    //desenho();
-
-    var observable = Rx.Observable.generate(
-        0,
-        function(state) { return true; },
-        function(state){ return Math.ceil((Math.random() * 10 % 4) - 1); },
-        function(state) { return state; }
-    ).throttle(1000);
-
-    observable.subscribe(function(n){
-        console.log(n);
-    });
+    desenho();
 });
