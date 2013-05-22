@@ -8,6 +8,25 @@
 
 $(function(){
 
+    var Observable = Rx.Observable;
+
+    Observable.fromEvent = function(element, event) {
+        return Observable.create(function(observer){
+            if(element){
+                element.addEventListener(event, function(e){
+                    observer.onNext(e);
+                });
+
+                return function(){};
+            }
+            else{
+                observer.onError('Element ' + selector + ' does not exist');
+                return function(){};
+            }
+        });
+    };
+
+
     function churrasco() {
         var carnes = ['picanha', 'frango', 'coracao', 'linguica'];
         var cozinha = function () {
@@ -47,26 +66,6 @@ $(function(){
     //churrasco();
 
     function desenho(){
-
-        var Observable = Rx.Observable;
-
-        Observable.fromEvent = function(element, event) {
-            return Observable.create(function(observer){
-                if(element){
-                    element.addEventListener(event, function(e){
-                        observer.onNext(e);
-                    });
-
-                    return function(){};
-                }
-                else{
-                    observer.onError('Element ' + selector + ' does not exist');
-                    return function(){};
-                }
-            });
-        };
-
-
         var canvas = document.getElementById('canvas')
 
         canvas.width = window.innerWidth;
@@ -111,5 +110,43 @@ $(function(){
             };
         }
     };
-    desenho();
+    //desenho();
+
+    function fatality(){
+        var sequencia = [
+            38, // up
+            38, // up
+            40, // down
+            40, // down
+            37, // left
+            39, // right
+            37, // left
+            39, // right
+            66, // b
+            65  // a
+        ];
+
+        var arrayEquals = function(array1, array2){
+            if(array1.length != array2.length) return false;
+
+            for(i = 0; i < array1.length; i++)
+                if(array1[i] != array2[i]) return false;
+
+            return true;
+        }
+
+        Rx.Observable.fromEvent(document, 'keyup')
+            .select(function (e) {
+                return e.keyCode; // pega o keycode
+            })
+            .bufferWithCount(10) // ultimos 10
+            .where(function (input) {
+                return arrayEquals(sequencia, input);
+            })  // sequencia correta
+            .subscribe(function () {
+                alert('FATALITY!');   // FATALITY!
+            });
+    };
+
+    fatality();
 });
