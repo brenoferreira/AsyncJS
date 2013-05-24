@@ -25,7 +25,7 @@ exports.twitter = function(req, res){
     };
     var result = "";
 
-    http.get(options, function(response){
+    http.get(options, function(response, err){
         response.on('data', function(data){
             result += data;
         });
@@ -37,5 +37,8 @@ exports.twitter = function(req, res){
         response.on('end', function(){
             res.json(result);
         });
+    })
+    .on('error', function(error){
+        res.send(500, 'error');
     });
 };

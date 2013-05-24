@@ -61,9 +61,9 @@ $(function(){
         quantidadePicanha.subscribe(function (resultado) {
             $('#churrasco').append('<p>Comeu picanha ' + resultado + ' vezes</p>');
         });
-        eu.subscribe(observer);
+        //eu.subscribe(observer);
     }
-    //churrasco();
+//    churrasco();
 
     function desenho(){
         var canvas = document.getElementById('canvas')
@@ -110,7 +110,7 @@ $(function(){
             };
         }
     };
-    //desenho();
+//    desenho();
 
     function fatality(){
         var sequencia = [

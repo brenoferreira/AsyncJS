@@ -113,6 +113,9 @@ $(function(){
                 })
                 .done(function(){
                     $('.btn').removeAttr('disabled');
+                })
+                .fail(function(error){
+                    $('#results').html('<div class="alert alert-error">Houve um erro ao carregar os dados</div>')
                 });
         });
     }
