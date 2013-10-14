@@ -27,34 +27,56 @@ $(function(){
             });
     };
 
-    var asyncSum = function(timeout){
+    var loadTwitter = function(){
         var deferred = $.Deferred();
 
-        if(timeout > 3){
-            deferred.reject('larger than 3');
-        }
         setTimeout(function(){
-            deferred.resolve(timeout);
+            deferred.resolve('twitter');
         }, 1000);
 
         return deferred.promise();
-    };
+    }
 
-    var asyncSumTest = function(){
-        asyncSum(1)
-            .then(function(result){
-                return asyncSum(result + 1);
+    var loadFacebook = function(){
+        var deferred = $.Deferred();
+
+        setTimeout(function(){
+            deferred.resolve('facebook');
+        }, 1000);
+
+        return deferred.promise();
+    }
+
+    var loadInstagram = function(){
+        var deferred = $.Deferred();
+
+        setTimeout(function(){
+            deferred.resolve('instagram');
+        }, 1000);
+
+        return deferred.promise();
+    }
+
+    var chaining = function(){
+        loadTwitter()
+            .then(function(twitter){
+                console.log(twitter);
+                return loadFacebook();
             })
-            .then(function(result){
-                return asyncSum(result + 1);
+            .then(function(facebook){
+                console.log(facebook);
+                return loadInstagram();
             })
-            .done(function(result){
-                alert('waited ' + result + ' times');
+            .then(function(instagram){
+                console.log(instagram);
             })
             .fail(function(error){
-                alert(error);
-            });
-    };
+                alert('error');
+            })
+            .done(function(){
+                alert('completed');
+            })
+    }
 
     var asyncProgress = function(){
         var deferred = $.Deferred();
@@ -81,9 +103,9 @@ $(function(){
     }
 
     var loadScripts = function(){
-        var d1 = $.getScript('/javascripts/dummies/dummy2.js');
-        var d2 = $.getScript('/javascripts/dummies/dummy3.js');
-        var d3 = $.getScript('/javascripts/dummies/dummy1.js');
+        var d3 = $.getScript('/javascripts/dummies/dummy3.js');
+        var d2 = $.getScript('/javascripts/dummies/dummy2.js');
+        var d1 = $.getScript('/javascripts/dummies/dummy1.js');
 
         $.when(d1, d2, d3)
             .done(function(dummy1, dummy2, dummy3){
@@ -120,5 +142,5 @@ $(function(){
         });
     }
 
-    twitterTest();
+    chaining();
 });
