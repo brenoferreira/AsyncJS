@@ -126,7 +126,7 @@ $(function(){
             var encodedQuery = encodeURIComponent($('#searchTxt').val());
             twitter(encodedQuery)
                 .then(function(results){
-                    return JSON.parse(results).results;
+                    return JSON.parse(results).statuses;
                 })
                 .then(function(tweets){
                     tweets.forEach(function(tweet){
@@ -138,9 +138,10 @@ $(function(){
                 })
                 .fail(function(error){
                     $('#results').html('<div class="alert alert-error">Houve um erro ao carregar os dados</div>')
+                    $('.btn').removeAttr('disabled');
                 });
         });
     }
 
-    chaining();
+    twitterTest();
 });
