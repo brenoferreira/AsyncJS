@@ -110,7 +110,6 @@ $(function(){
             };
         }
     };
-//    desenho();
 
     function fatality(){
         var sequencia = [
@@ -144,8 +143,20 @@ $(function(){
                 return arrayEquals(sequencia, input);
             })  // sequencia correta
             .subscribe(function () {
-                alert('FATALITY!');   // FATALITY!
+                drawFatality();   // FATALITY!
             });
+    };
+
+    drawFatality = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx = canvas.getContext('2d');
+        ctx.font = '90px Butcherman';
+        ctx.fillStyle = 'Red';
+        ctx.textBaseline = 'top';
+        ctx.fillText ('Fatality', 400, 200);
     };
 
     fatality();
